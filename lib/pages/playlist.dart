@@ -93,7 +93,12 @@ class _PlayListState extends State<PlayList> {
                       ),
                     );
                   },
-                );
+                ).whenComplete((){
+                  setState(() {
+                    
+                  });
+                });
+
               },
 //<<<.......................END OF BOTTOMSHEET SONGS LIST CREATION.....................>>>//
 
@@ -214,9 +219,9 @@ class _PlayListState extends State<PlayList> {
           },
         ),
       ),
-      floatingActionButton: IconButton(
-          onPressed: () { setState(() {});  },
-          icon: const Icon( Icons.refresh_outlined, color: Color.fromARGB(255, 9, 247, 172), size: 30, )),
+      // floatingActionButton: IconButton(
+      //     onPressed: () { setState(() {});  },
+      //     icon: const Icon( Icons.refresh_outlined, color: Color.fromARGB(255, 9, 247, 172), size: 30, )),
     );
   }
 }

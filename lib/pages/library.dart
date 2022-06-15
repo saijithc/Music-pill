@@ -178,7 +178,7 @@ class Library extends StatelessWidget {
                         ),
                         trailing: IconButton( onPressed: () { showDialog( context: context,builder: (ctx) {
                           return Column( mainAxisAlignment: MainAxisAlignment.center,children: [ AlertDialog( backgroundColor: Colors.transparent,
-                             content: Center(child: Text( 'Do you wanna delete ${Dbfunctions.playlist.value[index]} playlist?', style: const TextStyle( color: Colors.white), ), ),
+                             content: Center(child: Text( 'Do you wanna delete ${Dbfunctions.playlist.value[index].foldername} playlist?', style: const TextStyle( color: Colors.white), ), ),
                                  actions: [ Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                      children: [ ElevatedButton( onPressed: () { Navigator.of(context) .pop(); },
                                          child: const Text('Cancel', style: TextStyle(color: Colors.white), )),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music/functions/functions.dart';
 import 'package:music/functions/model/data_model.dart';
-import 'package:music/pages/home.dart';
+
 
 // ignore: must_be_immutable
 class CheckPlaylist extends StatefulWidget {
@@ -42,7 +42,7 @@ class _CheckPlaylistState extends State<CheckPlaylist> {
               playlistsongs: updatelist,
               foldername: Dbfunctions.playlist.value[widget.folderindex].foldername);
           await Dbfunctions.updateplaylist(widget.folderindex, updatedetai);
-        PlaylistsongsFunctions.showsongs(widget.folderindex);
+        // PlaylistsongsFunctions.showsongs(widget.folderindex);
           setState(() {});
           // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           //   content: Center( child: Text('Refresh Your Playlist', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Color.fromARGB(255, 224, 238, 231)), )),

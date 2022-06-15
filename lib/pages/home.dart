@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
                 Home.songs.clear();
                 Home.songs = item.data!;
                 return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent( maxCrossAxisExtent: 200, childAspectRatio: 1, crossAxisSpacing: 8, mainAxisSpacing: 0),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(mainAxisExtent: 200, maxCrossAxisExtent: 200, childAspectRatio: 1, crossAxisSpacing: 8, mainAxisSpacing: 0),
                   itemCount: item.data!.length,
                   shrinkWrap: true,
                   primary: false,
@@ -157,7 +157,9 @@ class _HomeState extends State<Home> {
                           onTap: () {
                             NowPlaying.player.setAudioSource(Concatinatig.createPlaylist(Home.songs),initialIndex: index);
                             NowPlaying.player.play();
-                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) =>  NowPlaying(songlist: Home.songs,)));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) =>  NowPlaying(songlist: Home.songs,))).whenComplete((){setState(() {
+                              
+                            });});
                           },
                         ),
                       ),
