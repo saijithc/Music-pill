@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
                           return Column( mainAxisAlignment: MainAxisAlignment.center,children: [ AlertDialog( backgroundColor: Colors.white,
                              content:  Center(child: Column(
                                children:  [
-                                 const Text( 'Do you wannt to reset your app ?', style: TextStyle( color: Color.fromARGB(255, 0, 0, 0),fontWeight: FontWeight.w700), ),SizedBox(height: MediaQuery.of(context).size.height*0.02,),const Text('All your playlist and favourite songs will be lost !',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 254, 155, 6)),)
+                                 const Text( 'Do you want to reset your app ?', style: TextStyle( color: Color.fromARGB(255, 0, 0, 0),fontWeight: FontWeight.w700), ),SizedBox(height: MediaQuery.of(context).size.height*0.02,),const Text('All your playlist and favourite songs will be lost !',style: TextStyle(fontSize: 12,color: Color.fromARGB(255, 254, 155, 6)),)
                                ],
                              ), ),
                                  actions: [ Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
