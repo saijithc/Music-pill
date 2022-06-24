@@ -8,7 +8,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(elevation: 0,title: const Text('About',style: TextStyle(color: Colors.white),),backgroundColor: Colors.black,),
     body: Container(height: double.infinity,color: Colors.black,child: Column(children: [const ListTile(leading: Text('Developed by ',style: TextStyle(color: Colors.amber),),trailing: Text('Saijith',style: TextStyle(color: Colors.white),),), SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-    const ListTile(leading: Text('Version',style: TextStyle(color: Colors.amber),),trailing: Text('1.0.0',style: TextStyle(color: Colors.white),),),
+    const ListTile(leading: Text('Version',style: TextStyle(color: Colors.amber),),trailing: Text('1.0.1',style: TextStyle(color: Colors.white),),),
     SizedBox(height: MediaQuery.of(context).size.height*0.01,),
     Row(mainAxisAlignment: MainAxisAlignment.start,
       children: [

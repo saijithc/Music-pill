@@ -4,7 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:music/favorite_check.dart';
 import 'package:music/functions/functions.dart';
 import 'package:music/pages/check_playlist.dart';
-import 'package:music/pages/home.dart';
+
 import 'package:music/pages/library.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:rxdart/rxdart.dart';
