@@ -7,4 +7,8 @@ String? foldername;
 @HiveField(1)
 List<dynamic>playlistsongs;
 PlaylistsModel({  this.foldername,  this.playlistsongs =const []});
+
+  whenComplete(allplaylist) {}
+
+  then(allplaylist) {}
 }

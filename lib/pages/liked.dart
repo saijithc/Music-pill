@@ -1,48 +1,38 @@
 import 'package:flutter/material.dart';
-
 import 'package:music/pages/concatinating.dart';
 import 'package:music/pages/now_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import '../controller/nowplaying/nowplaying_controller.dart';
 import '../functions/functions.dart';
-
-class LikedSongs extends StatelessWidget {
-  const LikedSongs({Key? key}) : super(key: key);
-
+import 'package:get/get.dart';
+class LikedSongs extends GetView {
+   LikedSongs({Key? key}) : super(key: key);
+  @override
+  final controller = Get.put(Dbfunctions());
+  final playercontroller = Get.put(NowPlayingController());
   @override
   Widget build(BuildContext context) {
-    Dbfunctions.getAllsongs();
-
-    return Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          elevation: null,
-          backgroundColor: Colors.black,
-          title: const Text(
-            'Liked Songs',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+    controller.getAllsongs();
+    return Scaffold(backgroundColor: Colors.black,
+        appBar: AppBar(elevation: null, backgroundColor: Colors.black,
+          title: const Text('Liked Songs', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
         ),
         body: Container(
           color: const Color.fromARGB(255, 0, 0, 0),
-          child: ValueListenableBuilder(
-            valueListenable: Dbfunctions.favouritesongs,
-            builder:
-                (BuildContext ctx, List<SongModel> favourList, Widget? child) {
-              return ListView.builder(
-                  itemCount: favourList.length,
-                  itemBuilder: (ctx, index) {
-                    
+          child: GetBuilder<Dbfunctions>(init: Dbfunctions(),
+            builder: (controller) {
+            return   ListView.builder(itemCount: controller.favouritesongs.length,
+                  itemBuilder: (ctx, index) {                    
                     return Column(
                       children: [
                         ListTile(
                           onTap: ()   {
-                           NowPlaying.player.setAudioSource(
-                              Concatinatig.createPlaylist(favourList),
+                           playercontroller.player.setAudioSource(Concatinatig.createPlaylist(controller.favouritesongs),
                                 initialIndex: index);
-                             NowPlaying.player.play();
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>  NowPlaying(songlist: favourList),
-                            ));
+                             playercontroller.player.play();
+                            Get.to(NowPlaying(NowPlaying.songlists.addAll(controller.favouritesongs )
+                              ));
                           },
                           leading: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.18,
@@ -50,86 +40,21 @@ class LikedSongs extends StatelessWidget {
                             child: QueryArtworkWidget(
                                 artworkFit: BoxFit.cover,
                                 artworkBorder: BorderRadius.circular(2),
-                                id: favourList[index].id,
+                                id: controller.favouritesongs[index].id,
                                 type: ArtworkType.AUDIO),
                           ),
-                          title: Text(
-                           favourList[index].title,
-                            style: const TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                color: Color.fromARGB(230, 241, 238, 238)),
+                          title: Text(controller.favouritesongs[index].title,style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,color: Color.fromARGB(230, 241, 238, 238)),
                           ),
-                          subtitle: Text(
-                            favourList[index].artist ?? 'unknown',
-                            style: const TextStyle(color: Colors.white30),
+                          subtitle: Text( controller.favouritesongs[index].artist ?? 'unknown',style: const TextStyle(color: Colors.white30),
                           ),
                           trailing: IconButton(
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (ctx) {
-                                    return Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        AlertDialog(
-                                          backgroundColor: Colors.transparent,
-                                          content: const Center(
-                                            child: Text(
-                                              'Do you wanna remove this song?',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                          actions: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text(
-                                                      'Cancel',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    )),
-                                                ElevatedButton(
-                                                    onPressed: () async {
-                                                      await Dbfunctions
-                                                          .deletefav(index);
-                                                          
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                          
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              const SnackBar(
-                                                        content: Text(
-                                                            'Removed from Liked Songs'),
-                                                        margin:
-                                                            EdgeInsets.all(30),
-                                                        behavior:
-                                                            SnackBarBehavior
-                                                                .floating,
-                                                      ));
-                                                    },
-                                                    child: const Text(
-                                                      'Remove',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),)
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    );
-                                  });
-                             
+                              Get.defaultDialog(middleText: "Do you want to remove this song?",onCancel: (){},textConfirm: "Remove",confirmTextColor: Colors.white,
+                              onConfirm: (){controller .deletefav(index);                              
+                              Get.back();
+                              Get.snackbar("Removed from Liked Songs", "",snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.white,margin:const EdgeInsets.all(40),duration: const Duration(seconds: 1));},cancelTextColor: const Color.fromARGB(255, 45, 141, 0),                              
+                              buttonColor: const Color.fromARGB(255, 249, 45, 26));
                             },
                             icon: const Icon(
                               Icons.favorite,

@@ -9,7 +9,6 @@ class Concatinatig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container();
-    
   }
    static ConcatenatingAudioSource createPlaylist(List<SongModel> songs) {
     List<AudioSource> sources = [];
