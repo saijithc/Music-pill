@@ -15,6 +15,7 @@ An ofline music player with basic functionalities made using flutter.
  - marquee(package)
  - audio_vedio_progress_bar(package)
  - Hive(data base)
+ - url_launcher(package)
 
 # State management
  - Getx
