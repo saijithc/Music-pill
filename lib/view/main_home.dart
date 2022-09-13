@@ -53,79 +53,76 @@ class Mainhome extends StatelessWidget {
           },
         ),
         footerHeight: h * .18,
-        footer: SizedBox(
-          // height: h * .5,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: Obx(() => BottomNavigationBar(
-                  unselectedItemColor: const Color.fromARGB(153, 156, 151, 151),
-                  currentIndex: controllerForBottom.selectedIndex.value,
-                  onTap: _onItemTapped,
-                  backgroundColor: Colors.black,
-                  items: <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                        activeIcon: CircleAvatar(
-                          radius: MediaQuery.of(context).size.aspectRatio * 40,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 1,
-                            width: MediaQuery.of(context).size.width * 1,
-                            child: const Icon(
-                              Icons.home,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image: AssetImage('assets/bottom.png'),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(30)),
+        footer: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Obx(() => BottomNavigationBar(
+                unselectedItemColor: const Color.fromARGB(153, 156, 151, 151),
+                currentIndex: controllerForBottom.selectedIndex.value,
+                onTap: _onItemTapped,
+                backgroundColor: Colors.black,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                      activeIcon: CircleAvatar(
+                        radius: MediaQuery.of(context).size.aspectRatio * 40,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 1,
+                          width: MediaQuery.of(context).size.width * 1,
+                          child: const Icon(
+                            Icons.home,
+                            color: Colors.white,
                           ),
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage('assets/bottom.png'),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(30)),
                         ),
-                        icon: const Icon(Icons.home),
-                        label: ''),
-                    BottomNavigationBarItem(
-                        activeIcon: CircleAvatar(
-                          radius: MediaQuery.of(context).size.aspectRatio * 60,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 1,
-                            width: MediaQuery.of(context).size.width * 1,
-                            child: const Icon(
-                              Icons.search,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image: AssetImage('assets/bottom.png'),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(50)),
+                      ),
+                      icon: const Icon(Icons.home),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      activeIcon: CircleAvatar(
+                        radius: MediaQuery.of(context).size.aspectRatio * 60,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 1,
+                          width: MediaQuery.of(context).size.width * 1,
+                          child: const Icon(
+                            Icons.search,
+                            size: 50,
+                            color: Colors.white,
                           ),
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage('assets/bottom.png'),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(50)),
                         ),
-                        icon: const Icon(Icons.search),
-                        label: ''),
-                    BottomNavigationBarItem(
-                        activeIcon: CircleAvatar(
-                          radius: MediaQuery.of(context).size.aspectRatio * 40,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 1,
-                            width: MediaQuery.of(context).size.width * 1,
-                            child: const Icon(
-                              Icons.music_note_outlined,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image: AssetImage('assets/bottom.png'),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(28)),
+                      ),
+                      icon: const Icon(Icons.search),
+                      label: ''),
+                  BottomNavigationBarItem(
+                      activeIcon: CircleAvatar(
+                        radius: MediaQuery.of(context).size.aspectRatio * 40,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 1,
+                          width: MediaQuery.of(context).size.width * 1,
+                          child: const Icon(
+                            Icons.music_note_outlined,
+                            color: Colors.white,
                           ),
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage('assets/bottom.png'),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(28)),
                         ),
-                        icon: const Icon(
-                          Icons.music_note_outlined,
-                        ),
-                        label: ''),
-                  ],
-                )),
-          ),
+                      ),
+                      icon: const Icon(
+                        Icons.music_note_outlined,
+                      ),
+                      label: ''),
+                ],
+              )),
         ),
       ),
     );
