@@ -16,6 +16,7 @@ An ofline music player with basic functionalities made using flutter.
  - audio_vedio_progress_bar(package)
  - Hive(data base)
  - url_launcher(package)
+ - we_slider
 
 # State management
  - Getx
