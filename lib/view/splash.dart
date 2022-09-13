@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music/main.dart';
+import 'package:music/view/main_home.dart';
 import '../functions/functions.dart';
 
 class Splash extends GetView {

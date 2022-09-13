@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:music/pages/favorite_check.dart';
+import 'package:marquee/marquee.dart';
+import 'package:music/view/favorite_check.dart';
 import 'package:music/functions/functions.dart';
-import 'package:music/pages/concatinating.dart';
-import 'package:music/pages/now_playing.dart';
-import 'package:music/pages/about.dart';
-import 'package:music/pages/splash.dart';
+import 'package:music/view/concatinating.dart';
+import 'package:music/view/now_playing.dart';
+import 'package:music/view/pop_up.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../controller/home/home_controller.dart';
 import '../controller/nowplaying/nowplaying_controller.dart';
@@ -13,8 +13,8 @@ import '../controller/nowplaying/nowplaying_controller.dart';
 class Home extends GetView {
   Home({Key? key}) : super(key: key);
   static List<SongModel> songs = [];
-  final homecontroller =Get.put(HomeController());
-final playercontroller = Get.put(NowPlayingController());
+  final homecontroller = Get.put(HomeController());
+  final playercontroller = Get.put(NowPlayingController());
   @override
   final controller = Get.put(Dbfunctions());
   final bool isPlayerViewVisible = false;
@@ -38,40 +38,7 @@ final playercontroller = Get.put(NowPlayingController());
                   )),
                   itemBuilder: (context) {
                     return List.generate(1, (index) {
-                      return PopupMenuItem(
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: const Text('About'),
-                              onTap: () {
-                                Get.to(const About());
-                              },
-                            ),
-                            const Divider(),
-                            ListTile(
-                              leading: const Text('Reset App'),
-                              onTap: () {
-                                Get.defaultDialog(
-                                    title: " Do you want to reset your app ? ",
-                                    titlePadding: const EdgeInsets.all(10),
-                                    middleText:
-                                        "All your playlist and favourite songs will be lost !",
-                                    middleTextStyle: const TextStyle(
-                                        color: Color.fromARGB(255, 140, 6, 6)),
-                                    onCancel: () {
-                                      Get.back();
-                                    },
-                                    onConfirm: () {
-                                      Dbfunctions.resetfav();
-                                      playercontroller.player.pause();
-                                      Dbfunctions.resetplaylist();
-                                      Get.to(Splash());
-                                    });
-                              },
-                            ),
-                          ],
-                        ),
-                      );
+                      return PopupMenuItem(child: PopUp());
                     });
                   },
                 ),
@@ -82,40 +49,42 @@ final playercontroller = Get.put(NowPlayingController());
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            GetBuilder<HomeController>(init:HomeController(),
+            GetBuilder<HomeController>(
+              init: HomeController(),
               builder: (controller) {
                 return FutureBuilder<List<SongModel>>(
-                  future: homecontroller.audioQuery.querySongs(
-                      sortType: null,
-                      orderType: OrderType.ASC_OR_SMALLER,
-                      uriType: UriType.EXTERNAL,
-                      ignoreCase: true),
-                  builder: (context, item) {
-                    if (item.data == null) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (item.data!.isEmpty) {
-                      return Center(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                            ),
-                            const Text('No Songs Found !',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 50)),
-                          ],
-                        ),
-                      );
-                    }
+                    future: homecontroller.audioQuery.querySongs(
+                        sortType: null,
+                        orderType: OrderType.ASC_OR_SMALLER,
+                        uriType: UriType.EXTERNAL,
+                        ignoreCase: true),
+                    builder: (context, item) {
+                      if (item.data == null) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (item.data!.isEmpty) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                              ),
+                              const Text('No Songs Found !',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 50)),
+                            ],
+                          ),
+                        );
+                      }
 
-                    //<<................add songs to the song list.............>>
+                      //<<................add songs to the song list.............>>
 
-                    Home.songs.clear();
-                    Home.songs = item.data!;
-                    // return GetBuilder<Dbfunctions>(builder: (controller) {
+                      Home.songs.clear();
+                      Home.songs = item.data!;
+                      // return GetBuilder<Dbfunctions>(builder: (controller) {
                       return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -135,19 +104,25 @@ final playercontroller = Get.put(NowPlayingController());
                                 child: Card(
                                   color: Colors.transparent,
                                   child: ListView(
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     children: [
                                       Center(
                                         child: Container(
                                           height:
-                                              MediaQuery.of(ctx).size.height * 0.13,
-                                          width:
-                                              MediaQuery.of(ctx).size.width * 0.4,
+                                              MediaQuery.of(ctx).size.height *
+                                                  0.13,
+                                          width: MediaQuery.of(ctx).size.width *
+                                              0.4,
                                           decoration: const BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.all(Radius.zero),
                                           ),
                                           child: QueryArtworkWidget(
+                                            nullArtworkWidget: Image.asset(
+                                              "assets/logo.jpg",
+                                              fit: BoxFit.cover,
+                                            ),
                                             id: item.data![index].id,
                                             type: ArtworkType.AUDIO,
                                             artworkFit: BoxFit.cover,
@@ -163,15 +138,16 @@ final playercontroller = Get.put(NowPlayingController());
                                             overflow: TextOverflow.ellipsis),
                                       ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
                                           GetBuilder<Dbfunctions>(
-                                            builder: (context) {
-                                              return FavCheck(
-                                                id: Home.songs[index].id,
-                                              );
-                                            }
-                                          ),
+                                              init: Dbfunctions(),
+                                              builder: (context) {
+                                                return FavCheck(
+                                                  id: Home.songs[index].id,
+                                                );
+                                              }),
                                         ],
                                       )
                                     ],
@@ -181,11 +157,13 @@ final playercontroller = Get.put(NowPlayingController());
                                   playercontroller.player.setAudioSource(
                                       Concatinatig.createPlaylist(Home.songs),
                                       initialIndex: index);
+                                  playercontroller.mainList.clear();
+                                  // NowPlaying.songlists.clear();
+                                  playercontroller.addSong(Home.songs);
                                   playercontroller.player.play();
+
                                   // Navigator.of(context).push(MaterialPageRoute(builder: (ctx) =>  NowPlaying(songlist: Home.songs,))).whenComplete((){setState(() { });});
-                                  Get.to(NowPlaying(
-                                 NowPlaying.songlists.addAll(Home.songs)
-                                  ));
+                                  Get.to(NowPlaying());
                                 },
                               ),
                             ),
@@ -193,9 +171,7 @@ final playercontroller = Get.put(NowPlayingController());
                         },
                       );
                     });
-                  },
-                
-              
+              },
             ),
           ],
         ),

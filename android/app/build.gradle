@@ -47,7 +47,7 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
+    
     defaultConfig {
         applicationId "in.brototype.Nirvana"
         minSdkVersion 21
