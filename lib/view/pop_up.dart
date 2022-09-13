@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:music/controller/nowplaying/nowplaying_controller.dart';
 import 'package:music/functions/functions.dart';
 import 'package:music/view/about.dart';
-
 import 'splash.dart';
 
 class PopUp extends GetView {
   PopUp({Key? key}) : super(key: key);
-
   final playercontroller = Get.put(NowPlayingController());
   @override
   Widget build(BuildContext context) {

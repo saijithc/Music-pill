@@ -114,7 +114,6 @@ class PlayList extends GetView {
                           playercontroller.player.play();
                           playercontroller.mainList.clear();
                           playercontroller.addSong(controller.playlistmodels);
-                          //NowPlaying.songlists.clear();
                           Get.to(NowPlaying());
                         },
                       ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:music/functions/functions.dart';
 import 'package:music/view/check_playlist.dart';
 import 'package:music/view/library.dart';
-import 'package:music/view/now_playing.dart';
 import '../controller/nowplaying/nowplaying_controller.dart';
 
 class PlaylistButton extends StatelessWidget {

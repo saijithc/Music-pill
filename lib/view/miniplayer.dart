@@ -7,23 +7,19 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 class MiniPlayer extends GetView {
   MiniPlayer({Key? key}) : super(key: key);
-
   final playercontroller = Get.put(NowPlayingController());
-
-  // final List<SongModel>? finallist = [];
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
     return Positioned(
-
         //<<<<<<<<<<<<<<<<<......................***.MINI PLAYER SCREEN CREATION.***..................>>>>>>>>>>>>>>>>>>>
-
         child: playercontroller.player.currentIndex != null ||
                 playercontroller.player.playing
             ? Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
                 child: InkWell(
                   child: Container(
-                    height: 60,
+                    height: h * .075,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 255, 255, 255),
@@ -110,18 +106,12 @@ class MiniPlayer extends GetView {
                     ),
                   ),
                   onTap: () {
-                    // for (var i = 0;
-                    //     i < playercontroller.playingdetails!.length;
-                    //     i++) {
-                    //   finallist!.add(playercontroller.playingdetails![i]);
-                    // }
                     Get.to(NowPlaying());
                   },
                 ),
               )
             : const Text('')
-        //   }
-        // )
+
         //<<<<<<<<<<<<<<<<<<<<<<................ENDING OF MINIPLAYER SCREEN CREATION..........................................>>>>>>>>>>>>>>
         );
   }

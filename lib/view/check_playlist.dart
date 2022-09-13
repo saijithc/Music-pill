@@ -12,13 +12,11 @@ class CheckPlaylist extends GetView {
       required this.folderindex,
       required this.id})
       : super(key: key);
-
   final dynamic index;
   final int folderindex;
   final int id;
   @override
   final Dbfunctions controller = Get.put(Dbfunctions());
-
   @override
   Widget build(BuildContext context) {
     List<dynamic> updatelist = [];

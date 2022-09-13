@@ -43,7 +43,6 @@ class LikedSongs extends GetView {
                                 initialIndex: index);
                             playercontroller.mainList.clear();
                             playercontroller.addSong(controller.favouritesongs);
-                            // NowPlaying.songlists.clear();
                             playercontroller.player.play();
                             Get.to(NowPlaying());
                           },

@@ -77,7 +77,6 @@ class Search extends GetView {
                                     playercontroller.player.setAudioSource(
                                         Concatinatig.createPlaylist(Home.songs),
                                         initialIndex: songindex);
-                                    //NowPlaying.songlists.clear();
                                     playercontroller.mainList.clear();
                                     playercontroller.addSong(Home.songs);
                                     playercontroller.player.play();

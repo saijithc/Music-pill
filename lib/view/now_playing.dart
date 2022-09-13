@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -17,8 +15,6 @@ import 'package:rxdart/rxdart.dart';
 
 class NowPlaying extends GetView {
   NowPlaying({Key? key}) : super(key: key);
-  // static List<SongModel> songlists = [];
-
   static List<SongModel>? finallist = [];
   final nowController = Get.put(NowPlayingController());
   @override
@@ -33,7 +29,6 @@ class NowPlaying extends GetView {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final h = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -66,15 +61,12 @@ class NowPlaying extends GetView {
                             nowController.player
                                 .seekToNext()
                                 .whenComplete(() => nowController.update());
-                            // setState(() {
-                            // });
                           }
                         } else if (dragDownDetails.primaryVelocity! > 0) {
                           if (nowController.player.hasPrevious) {
                             nowController.player
                                 .seekToPrevious()
                                 .whenComplete(() => nowController.update());
-                            // setState(() { });
                           }
                         }
                       },
@@ -118,9 +110,6 @@ class NowPlaying extends GetView {
                                   .title,
                               pauseAfterRound: const Duration(seconds: 10),
                               velocity: 30,
-                              // style: const TextStyle(
-                              //     color: Colors.white,
-                              //     fontWeight: FontWeight.w700),
                             ),
                           ),
                         ),

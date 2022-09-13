@@ -3,7 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

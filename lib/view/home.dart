@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marquee/marquee.dart';
 import 'package:music/view/favorite_check.dart';
 import 'package:music/functions/functions.dart';
 import 'package:music/view/concatinating.dart';
@@ -20,7 +19,6 @@ class Home extends GetView {
   final bool isPlayerViewVisible = false;
   @override
   Widget build(BuildContext context) {
-//controller.getAllsongs();
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -79,9 +77,7 @@ class Home extends GetView {
                           ),
                         );
                       }
-
                       //<<................add songs to the song list.............>>
-
                       Home.songs.clear();
                       Home.songs = item.data!;
                       // return GetBuilder<Dbfunctions>(builder: (controller) {

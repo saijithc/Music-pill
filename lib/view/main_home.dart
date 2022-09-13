@@ -14,33 +14,28 @@ class Mainhome extends StatelessWidget {
   Mainhome({Key? key}) : super(key: key);
   final controllerForBottom = Get.put(BottomController());
   final maincontroller = Get.put(MainHomeController());
-
   final playercontroller = Get.put(NowPlayingController());
-  // int selectedIndex =0;
   final PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.black,
       extendBody: true,
       body: WeSlide(
         hidePanelHeader: true,
         panelMaxSize: MediaQuery.of(context).size.height,
-        panelMinSize: 150,
+        panelMinSize: h * 0.18,
         blur: true,
-        panel:
-            //  playercontroller.player.currentIndex != null ||
-            //         playercontroller.player.playing
-            //     ?
-            GetBuilder<NowPlayingController>(
+        panel: GetBuilder<NowPlayingController>(
           init: NowPlayingController(),
           builder: (_) {
             return playercontroller.player.currentIndex != null ||
                     playercontroller.player.playing
                 ? NowPlaying()
-                : SizedBox();
+                : const SizedBox();
           },
         ),
-        // : SizedBox(),
         panelHeader: GetBuilder<NowPlayingController>(
             init: NowPlayingController(),
             builder: (context) {
@@ -57,9 +52,9 @@ class Mainhome extends StatelessWidget {
             controllerForBottom.changeIndex(page);
           },
         ),
-        footerHeight: 150,
+        footerHeight: h * .18,
         footer: SizedBox(
-          height: 160,
+          // height: h * .5,
           child: Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Obx(() => BottomNavigationBar(
